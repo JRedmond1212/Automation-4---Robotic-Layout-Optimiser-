@@ -33,7 +33,7 @@ PROGRESS_UPDATE_SEC = 0.2
 # Cloud-safety caps (IMPORTANT)
 MAX_ENUMERATED_LAYOUTS = 2000        # cap how many layouts recursion can generate
 MAX_EVALUATED_LAYOUTS = 400          # cap how many layouts we actually simulate
-FINE_HEATMAP_GRID_N = 100            # lower than 360 to reduce CPU/RAM
+FINE_HEATMAP_GRID_N = 200            # lower than 360 to reduce CPU/RAM
 
 # Litres proxy assumption:
 LITRES_PER_DRUM = 208.0
@@ -957,3 +957,4 @@ for c in pct_cols:
 show["Cycles"] = show["Cycles"].round(1)
 
 st.dataframe(show, width="stretch")
+
