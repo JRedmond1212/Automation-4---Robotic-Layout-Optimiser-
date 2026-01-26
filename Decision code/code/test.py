@@ -31,9 +31,9 @@ PLOT_HEIGHT = 260
 PROGRESS_UPDATE_SEC = 0.2
 
 # Cloud-safety caps (IMPORTANT)
-MAX_ENUMERATED_LAYOUTS = 5000        # cap how many layouts recursion can generate
+MAX_ENUMERATED_LAYOUTS = 2000        # cap how many layouts recursion can generate
 MAX_EVALUATED_LAYOUTS = 400          # cap how many layouts we actually simulate
-FINE_HEATMAP_GRID_N = 260            # lower than 360 to reduce CPU/RAM
+FINE_HEATMAP_GRID_N = 100            # lower than 360 to reduce CPU/RAM
 
 # Litres proxy assumption:
 LITRES_PER_DRUM = 208.0
