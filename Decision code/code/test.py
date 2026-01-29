@@ -94,19 +94,19 @@ class OrderState:
 # -----------------------------
 def default_modules() -> Dict[str, ModuleType]:
     rows = [
-        ("C01.0", "boxes only, x1", True, 1, False, 0, 10, 0, 10000, 4, "box_only"),
-        ("C01.1", "boxes only, x2", True, 2, False, 0, 10, 0, 20000, 4, "box_only"),
-        ("C01.2", "boxes only, x3", True, 3, False, 0, 10, 0, 30000, 4, "box_only"),
-        ("C01.3", "boxes only, x4", True, 4, False, 0, 30, 0, 40000, 4, "box_only"),
-        ("C01.4", "boxes only, x6", True, 6, False, 0, 30, 0, 150000, 4, "box_only"),
-        ("C02.0", "barrels only, x1", False, 0, True, 1, 10, 0, 30000, 4, "drum_only"),
-        ("C02.1", "barrels only, x2", False, 0, True, 2, 10, 0, 150000, 4, "drum_only"),
+        ("C01.0", "boxes only, x1", True, 1, False, 0, 15, 0, 87210, 12.4, "box_only"),
+        ("C01.1", "boxes only, x2", True, 2, False, 0, 15, 0, 119680, 10.62, "box_only"),
+        ("C01.2", "boxes only, x3", True, 3, False, 0, 15, 0, 116620, 10.62, "box_only"),
+        ("C01.3", "boxes only, x4", True, 4, False, 0, 30, 0, 146620, 12., "box_only"),
+        ("C01.4", "boxes only, x6", True, 6, False, 0, 30, 0, 634000, 18.732, "box_only"),
+        ("C02.0", "barrels only, x1", False, 0, True, 1, 15, 0, 119680, 10.62, "drum_only"),
+        ("C02.1", "barrels only, x2", False, 0, True, 2, 15, 0, 146620, 12.4, "drum_only"),
 
         # dual robots do ONE product type per cycle (either boxes OR drums)
-        ("C03.0", "boxes and barrels (Built in), x3 OR x1", True, 3, True, 1, 10, 10, 30000, 4, "dual_built_in"),
-        ("C03.1", "boxes and barrels (Built in), x6 OR x2", True, 6, True, 2, 30, 10, 150000, 4, "dual_built_in"),
-        ("C04.0", "boxes and barrels (Tool change), x3 OR x1", True, 3, True, 1, 10, 30, 30000, 4, "dual_toolchange"),
-        ("C04.1", "boxes and barrels (Tool change), x6 OR x2", True, 6, True, 2, 30, 30, 150000, 4, "dual_toolchange"),
+        ("C03.0", "boxes and barrels (Built in), x3 OR x1", True, 3, True, 1, 15, 5, 174930, 10.62, "dual_built_in"),
+        ("C03.1", "boxes and barrels (Built in), x6 OR x2", True, 6, True, 2, 30, 5, 951000, 18.732, "dual_built_in"),
+        ("C04.0", "boxes and barrels (Tool change), x3 OR x1", True, 3, True, 1, 15, 30, 174930, 10.62, "dual_toolchange"),
+        ("C04.1", "boxes and barrels (Tool change), x6 OR x2", True, 6, True, 2, 30, 30, 951000, 18.732, "dual_toolchange"),
     ]
     out: Dict[str, ModuleType] = {}
     for r in rows:
@@ -957,6 +957,7 @@ for c in pct_cols:
 show["Cycles"] = show["Cycles"].round(1)
 
 st.dataframe(show, width="stretch")
+
 
 
 
