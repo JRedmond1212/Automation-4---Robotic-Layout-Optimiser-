@@ -102,7 +102,10 @@ def default_modules() -> Dict[str, ModuleType]:
         ("C02.0", "barrels only, x1", False, 0, True, 1, 15, 0, 119680, 1, "drum_only"),
         ("C02.1", "barrels only, x2", False, 0, True, 2, 15, 0, 146620, 1, "drum_only"),
 
-
+        # dual robots do ONE product type per cycle (either boxes OR drums)
+        ("C03.0", "boxes and barrels (Built in), x3 OR x1", True, 3, True, 1, 15, 5, 174930, 1, "dual_built_in"),
+        ("C03.1", "boxes and barrels (Built in), x6 OR x2", True, 6, True, 2, 30, 5, 951000, 2, "dual_built_in"),
+        ("C03.2", "boxes and barrels (Built in), x3 OR x2", True, 3, True, 2, 15, 5, 951000, 2, "dual_built_in"),
         
         ("C04.0", "boxes and barrels (Tool change), x3 OR x1", True, 3, True, 1, 15, 30, 174930, 1, "dual_toolchange"),
         ("C04.1", "boxes and barrels (Tool change), x6 OR x2", True, 6, True, 2, 30, 30, 951000, 2, "dual_toolchange"),
@@ -957,6 +960,7 @@ for c in pct_cols:
 show["Cycles"] = show["Cycles"].round(1)
 
 st.dataframe(show, width="stretch")
+
 
 
 
