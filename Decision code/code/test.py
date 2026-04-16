@@ -721,8 +721,8 @@ with st.sidebar:
         n_orders = st.slider(
             "Orders per mixture point (random sequence)",
             min_value=20,
-            max_value=400,   # lowered for cloud safety
-            value=100,
+            max_value=4000,   # lowered for cloud safety
+            value=2000,
             step=10,
             help="For each mixture (p1,p2,p3), we queue this many random orders and simulate tool switching/idle.",
         )
