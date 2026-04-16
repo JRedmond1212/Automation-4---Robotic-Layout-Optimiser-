@@ -716,7 +716,7 @@ with st.sidebar:
         uploaded = st.file_uploader("Config Excel File", type=["xlsx"])
         use_defaults = st.checkbox("Use default Config File", value=(uploaded is None))
 
-        max_area = st.number_input("Max Robot Area (m²)", min_value=0.1, value=8.0, step=1.0)
+        max_area = st.number_input("Max Robot Area (m²)", min_value=0.1, value=2.0, step=1.0)
 
         n_orders = st.slider(
             "Orders per mixture point (random sequence)",
