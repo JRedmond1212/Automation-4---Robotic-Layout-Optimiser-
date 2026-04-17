@@ -624,7 +624,7 @@ def make_agg_plot(
                     overlaying="y", side="right", showgrid=False),
         barmode="overlay",
     )
-    fig.update_xaxes(title_text="No. of robots", tickmode="linear", tick0=0, dtick=1)
+    fig.update_xaxes(title_text="Number of robots", tickmode="linear", tick0=0, dtick=1)
     return fig
 
 
@@ -706,7 +706,7 @@ def make_triangle_heatmap(points_df, title, zmin, zmax):
 # APP
 # ─────────────────────────────────────────────────────────────────────────────
 st.set_page_config(page_title="Packing Line Optimiser", layout="wide")
-st.title("Robotic Packing Line Config Optimiser")
+st.title("Automated Packing Line: Configuration & Robot Selection Tool")
 
 
 with st.sidebar:
@@ -714,14 +714,13 @@ with st.sidebar:
     with st.form("form", clear_on_submit=False):
         max_robots = st.slider(
             "Max number of robots",
-            min_value=0, max_value=6, value=3, step=1,
-            help="Evaluates every EE combination for 1, 2, ... N robots. "
-                 "Note: N=5 has 3,003 combos, N=6 has 8,008 — run time scales steeply.",
+            min_value=0, max_value=6, value=4, step=1,
+            help="Evaluates every EE combination for N robots.",
         )
         n_orders = st.slider(
-            "Orders per mixture point",
+            "Orders per Monte Carlo Sim",
             min_value=20, max_value=400, value=200, step=10,
-            help="Random orders queued per mixture ratio point.",
+            help="Number of orders queued per mixture ratio.",
         )
         run = st.form_submit_button("Run")
 
@@ -901,7 +900,7 @@ df["_label"] = df.apply(
     axis=1,
 )
 selected_idx = st.selectbox(
-    "Configuration (robots | kL/hr/unit area | EE layout)",
+    "Configuration (N robots | kL/hr/unit area | EE Configuration)",
     range(len(df)),
     format_func=lambda i: df["_label"].iloc[i],
     index=0,
@@ -924,15 +923,7 @@ st.caption(
 # Aggregate summary plots
 # ─────────────────────────────────────────────────────────────────────────────
 st.subheader("Throughput vs Number of Robots")
-st.caption(
-    "**Legend —** "
-    "—— Max (green dashed)    "
-    "—— Median (dark)    "
-    "—— Min (red dashed)    "
-    "▮ Median kL/hr bars (amber, right axis)    "
-    "● Best config per N (red dot)    "
-    "● Selected config (blue dot)"
-)
+
 
 # Best config per N (by median L/hr per unit area) and selected config coords
 ns_evaluated = sorted(df["n_robots"].unique())
@@ -950,7 +941,7 @@ with c1:
     st.plotly_chart(
         make_agg_plot(
             df_agg,
-            title="Orders/hr vs No. Robots",
+            title="Orders/hr vs Number of Robots",
             y_max="max_thr", y_med="median_thr", y_min="min_thr",
             y_label="Orders / hr",
             lph_col="median_lph",
@@ -964,7 +955,7 @@ with c2:
     st.plotly_chart(
         make_agg_plot(
             df_agg,
-            title="Orders/hr per Unit Area vs No. Robots",
+            title="Orders/hr per Unit Area vs Number of Robots",
             y_max="max_tpa", y_med="median_tpa", y_min="min_tpa",
             y_label="Orders / hr / unit area",
             lph_col="median_lph_per_area",
@@ -983,7 +974,7 @@ with st.expander(
     f"Results Ranking Table — {len(df):,} configurations, ranked by median kL/hr/unit area",
     expanded=False,
 ):
-    st.caption("Ranked by median L/hr per unit area (best throughput density). Layout decoded to EE names.")
+    st.caption("Ranked by median L/hr per unit area (best throughput efficeny).")
 
     display_df = df[[
         "n_robots", "layout_str", "unit_area", "cost",
@@ -1008,7 +999,7 @@ with st.expander(
 # ─────────────────────────────────────────────────────────────────────────────
 # Order Mixture Heatmap — colour scale scoped to selected config only
 # ─────────────────────────────────────────────────────────────────────────────
-st.markdown("### Order Mixture Ratio Heatmap")
+st.markdown("### Order Mixture Ratio Heatmap (Shows Best and Worst Case Scenarios)")
 ratios_fine = stepped_ratios(FINE_STEP_FOR_SELECTED)
 sel_layout  = parse_layout_str(selected)
 sel_points  = []
